@@ -1,0 +1,12 @@
+=head1 Name
+
+sqitch-load_data-usage - Sqitch load_data usage statement
+
+=head1 Usage
+
+	sqitch [options] load_data [<change-options>] 
+
+=head1 Options
+
+	-n --note               a note describing the change
+	-d --data               specify data folder

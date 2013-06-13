@@ -1,0 +1,13 @@
+=head1 Name
+
+	sqitch-dump_data - Dump data for current status of migration
+
+=head1 Synopsis
+
+	sqitch [options] dump_data [<dependency-options>]
+
+=head1 Description
+
+	Dump the data for current state of migration.  
+
+=cut

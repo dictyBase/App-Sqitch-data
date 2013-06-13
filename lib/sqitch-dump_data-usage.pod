@@ -1,0 +1,12 @@
+=head1 Name
+
+sqitch-dump_data-usage - Sqitch dump_data usage statement
+
+=head1 Usage
+
+	sqitch [options] dump_data [<change-options>] 
+
+=head1 Options
+
+	-n --note               a note describing the change
+	-d --data               specify data folder

@@ -1,0 +1,13 @@
+=head1 Name
+
+	sqitch-load_data - Load data for current status of migration from SQL dump
+
+=head1 Synopsis
+
+	sqitch [options] load_data [<dependency-options>]
+
+=head1 Description
+
+	Load data for current state of migration from SQL dump.  
+
+=cut
