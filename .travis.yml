@@ -1,0 +1,26 @@
+language: perl
+perl:
+    - "5.16"
+    - "5.10"
+
+branches:
+    only:
+        - develop
+
+before_install:
+    - "sudo apt-get update"
+    - "sudo apt-get install libdb-dev"
+    - "cpanm Carton"
+    - createdb -U postgres test_chado
+
+install: carton install
+
+script: "prove -Ilib t/*.t -v"
+
+notifications:
+    email: false
+
+env: PERL_CPANM_OPT="--notest"
+
+after_success:
+    cover -report coveralls
