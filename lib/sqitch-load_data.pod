@@ -8,6 +8,10 @@
 
 =head1 Description
 
-	Load data for current state of migration from SQL dump.  
+Load data for current state of migration from SQL dump.  
 
 =cut
+
+=head1 Sqitch
+ 
+Part of the L<sqitch> suite.
