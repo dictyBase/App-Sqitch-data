@@ -11,7 +11,7 @@ before_install:
     - "sudo apt-get update"
     - "sudo apt-get install libdb-dev"
     - "cpanm Carton"
-    - createdb -U postgres test_chado
+    - createdb -U postgres test_chado_sqitch
 
 install: carton install
 
