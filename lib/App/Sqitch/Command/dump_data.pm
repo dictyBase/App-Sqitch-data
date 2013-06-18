@@ -39,32 +39,36 @@ has project => (
     },
 );
 
-#has _current_change_id => ();
-
-#has _data_dump_file => (
-#    is   => 'rw',
-#    isa  => 'Str',
-#    lazy => 1,
-#);
+has data_dir => (
+    is      => 'rw',
+    isa     => 'Str',
+    lazy    => 1,
+    default => sub {
+        my $self = shift;
+        return $self->sqitch->config->get( key => 'core.data_dir' );
+    }
+);
 
 sub execute {
 
-    my $self   = shift;
+    my $self = shift;
+
     my $engine = $self->engine;
-    my $state  = $engine->current_state( $self->project ) || hurl {
+    my $state = $engine->current_state( $self->project ) || hurl {
         ident   => 'status',
         message => __ 'No changes deployed',
         exitval => 1,
     };
 
-# Change, Change ID, Database name
-# print $state->{change} . "\n" . $state->{change_id} . "\n" . $engine->destination . "\n";
+	# Change, Change ID, Database name
+	# print $state->{change} . "\n" . $state->{change_id} . "\n" . $engine->destination . "\n";
 
+	#print $self->sqitch->config->deploy_dir."\n";
     my $cmd
         = "pg_dump -Fp "
-        . $engine->destination
-        . " -f data/$state->{change_id}.dump";
-		# print "Dumping data";
+        . $engine->destination . " -f "
+        . $self->data_dir . "/"
+        . $state->{change_id} . ".dump";
 
     system($cmd);
 }

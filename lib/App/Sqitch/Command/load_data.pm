@@ -39,6 +39,16 @@ has project => (
     },
 );
 
+has data_dir => (
+    is      => 'rw',
+    isa     => 'Str',
+    lazy    => 1,
+    default => sub {
+        my $self = shift;
+        return $self->sqitch->config->get( key => 'core.data_dir' );
+    }
+);
+
 sub execute {
 
     my $self   = shift;
@@ -51,10 +61,12 @@ sub execute {
     };
 
     my $cmd
-        = "psql -q -d " . $engine->destination . " -f data/$state->{change_id}.dump";
-	print "Loading data from dump";
-	system($cmd);
+        = "psql -q -d "
+        . $engine->destination . " -f "
+        . $self->data_dir . "/"
+        . $state->{change_id} . ".dump";
 
+    system($cmd);
 }
 
 1;
