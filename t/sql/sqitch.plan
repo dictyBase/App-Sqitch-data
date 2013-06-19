@@ -1,0 +1,5 @@
+%syntax-version=1.0.0-b2
+%project=sql
+
+users 2013-06-19T19:14:20Z Yogesh Pandit <ypt527@dhcp-165-124-223-195.nubic.northwestern.edu> # Creates table to track our users.
+flips [users] 2013-06-19T19:19:30Z Yogesh Pandit <ypt527@dhcp-165-124-223-195.nubic.northwestern.edu> # Adds table for storing flips.
