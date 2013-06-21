@@ -3,6 +3,8 @@ package App::Sqitch::Command::load_data;
 
 use 5.010;
 use App::Sqitch::X qw(hurl);
+use App::Sqitch::DataHandler::pg;
+use App::Sqitch::DataHandler::sqlite;
 use Locale::TextDomain qw(App-Sqitch);
 use Mouse;
 use namespace::autoclean;
@@ -60,12 +62,12 @@ sub execute {
         exitval => 1,
     };
 
-    my $cmd
-        = "psql -q -d "
-        . $engine->destination . " -f "
-        . $self->data_dir . "/"
-        . $state->{change_id} . ".dump";
+    my $db = $self->sqitch->_engine;
 
+    #print $db . "\n";
+    my $handler = 'App::Sqitch::DataHandler::' . $db;
+    my $cmd     = $handler->load( $engine->destination,
+        $self->data_dir, $state->{change_id} );
     system($cmd);
 }
 

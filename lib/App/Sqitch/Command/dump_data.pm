@@ -3,6 +3,8 @@ package App::Sqitch::Command::dump_data;
 
 use 5.010;
 use App::Sqitch::X qw(hurl);
+use App::Sqitch::DataHandler::pg;
+use App::Sqitch::DataHandler::sqlite;
 use Locale::TextDomain qw(App-Sqitch);
 use Mouse;
 use namespace::autoclean;
@@ -60,16 +62,15 @@ sub execute {
         exitval => 1,
     };
 
-	# Change, Change ID, Database name
-	# print $state->{change} . "\n" . $state->{change_id} . "\n" . $engine->destination . "\n";
+# Change, Change ID, Database name
+# print $state->{change} . "\n" . $state->{change_id} . "\n" . $engine->destination . "\n";
 
-	#print $self->sqitch->config->deploy_dir."\n";
-    my $cmd
-        = "pg_dump -Fp "
-        . $engine->destination . " -f "
-        . $self->data_dir . "/"
-        . $state->{change_id} . ".dump";
+    my $db = $self->sqitch->_engine;
 
+    #print $db . "\n";
+    my $handler = 'App::Sqitch::DataHandler::' . $db;
+    my $cmd     = $handler->dump( $engine->destination,
+        $self->data_dir, $state->{change_id} );
     system($cmd);
 }
 
