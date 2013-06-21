@@ -15,9 +15,11 @@ my %module_build_args = (
     "dist_version" => "0.0.1",
     "license"      => "perl",
     "module_name"  => "App::Sqitch::Command::data",
-    "requires"     => { "App::Sqitch" => "0.972" }
-
-        #    "test_requires" => { "Test::More" => "0.98" }
+    "requires"     => {
+        "App::Sqitch" => "0.972",
+        "DBD::Pg"     => "2.19.3",
+        "DBD::SQLite" => "1.39"
+    }
 );
 
 my $build = Module::Build->new(%module_build_args);
