@@ -2,10 +2,8 @@
 use strict;
 
 use App::Sqitch;
-use File::Spec;
 use FindBin qw($Bin);
 use Path::Class qw(dir file);
-use Test::Dir;
 use Test::Exception;
 use Test::More qw/no_plan/;
 
