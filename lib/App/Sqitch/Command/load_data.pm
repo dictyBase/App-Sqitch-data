@@ -5,6 +5,7 @@ use 5.010;
 use App::Sqitch::X qw(hurl);
 use App::Sqitch::DataHandler::pg;
 use App::Sqitch::DataHandler::sqlite;
+use IPC::Cmd qw[run];
 use Locale::TextDomain qw(App-Sqitch);
 use Mouse;
 use namespace::autoclean;
@@ -62,13 +63,12 @@ sub execute {
         exitval => 1,
     };
 
-    my $db = $self->sqitch->_engine;
-
-    #print $db . "\n";
+    my $db      = $self->sqitch->_engine;
     my $handler = 'App::Sqitch::DataHandler::' . $db;
     my $cmd     = $handler->load( $engine->destination,
         $self->data_dir, $state->{change_id} );
-    system($cmd);
+
+    run( command => $cmd, verbose => 0, timeout => 20 );
 }
 
 1;
