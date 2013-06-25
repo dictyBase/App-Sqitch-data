@@ -11,6 +11,8 @@ branches:
 before_install:
     - "sudo apt-get update"
     - "sudo apt-get install libdb-dev"
+    - "cpanm -n --quiet --installdeps ."
+    - "cpanm --quiet -n Devel::Cover::Report::Coveralls Test::File"
 
 notifications:
     email: false
