@@ -19,7 +19,8 @@ my %module_build_args = (
         "App::Sqitch" => "0.972",
         "DBD::Pg"     => "2.19.3",
         "DBD::SQLite" => "1.39"
-    }
+    },
+    "test_requires" => { "Test::File" => "1.34" }
 );
 
 my $build = Module::Build->new(%module_build_args);
