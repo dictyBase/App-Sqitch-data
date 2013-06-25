@@ -9,7 +9,12 @@ http://dictybase.org
 
 * Background
 
--
+Chado schema is stable and does NOT have default versioning system
+
+We will have to make changes to default schema. It should be possible for us to make changes upstream 
+e.g - If we make changes on default schema today, and the schema changes tomorrow; we should be able to keep track of all changes 
+
+*We are NOT doing data versioning, ONLY schema versioning*
 
 * Objective
 
@@ -17,5 +22,5 @@ http://dictybase.org
 
 * How it will work?
 
--
+- 
 -
