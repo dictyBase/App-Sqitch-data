@@ -1,0 +1,4 @@
+bin/sqitch
+share/
+tmp/
+data/
