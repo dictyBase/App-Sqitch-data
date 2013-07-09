@@ -6,7 +6,6 @@ use App::Sqitch::Command::dump_data;
 use FindBin qw($Bin);
 
 sub setup {
-
     my $self = @_;
 
     $ENV{SQITCH_CONFIG}        = 'nonexistent.conf';
@@ -27,7 +26,10 @@ sub setup {
 }
 
 sub teardown {
-    print "Tearing down\n";
+    my $self = @_;
+    unlink(
+        Path::Class::Dir->new($Bin)->subdir('sql')->subdir('data')->stringify
+            . "/813fcb3f292220dfb4d903d64ae70704824fe774.dump" );
 }
 
 1;
